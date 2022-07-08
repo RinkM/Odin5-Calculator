@@ -31,7 +31,7 @@ div{
     width: 80px;
     height: 80px;
     line-height: 80px;
-    background-color: aquamarine;
+    background-color: chartreuse;
     flex-grow:1;
     border-radius: 15px;
     margin:3px;
@@ -53,7 +53,7 @@ div{
 }
 
 .screen{
-    
+    height: 2em;
     flex-grow: 1;
     text-align: end;
     align-self: flex-end;
