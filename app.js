@@ -1,12 +1,19 @@
-let var1 = "";
-let var2;
+
+let screenDiv;
+let var1="";
+let var2 ="";
+let operator="";
 let var3;
-let answer;
+let answer="";
+let equation = `${var1} ${operator} ${var2}`
 
 let num1 = 15;
 let num2 = 3;
 let result;
-let var1Status = true;
+let numberSelect = false;
+const setNumberSelect =  (number)=>{numberSelect = number};
+
+
 
 let allButtons = document.querySelectorAll(".button");
 
@@ -21,6 +28,8 @@ let allButtons = document.querySelectorAll(".button");
 // const daButtons = allButtons.map(btn => {
 //     addEventListener(onclick, console.log("click") )
 // })
+
+const workspace = document.querySelector(".workspace");
 
 const btnOne = document.querySelector(".btnOne");
 const btnTwo = document.querySelector(".btnTwo");
@@ -48,50 +57,69 @@ const btnPercent = document.querySelector(".btnPercent");
 const screen  = document.querySelector(".screen");
 
 // first or 2nd variable selector.
-let numberSelect;
-const setNumberSelect =  (number)=>{numberSelect = number};
-const checkNumberSelect = ()=>{
-    if (numberSelect == 1) {
-        return var1
-    }else if (numberSelect == 2) {
-        return var2
-    }
-}
-
-const equation = {
-    "x":"",
-    "operator":"plus",
-    "y":"",
-    "answer": "",
-} 
 
 // Does Decimal work?
 // What's up with the function list?  it runs automatically...
+// https://www.w3.org/TR/uievents-code/#keyboard-key-codes
 
 const calcButtons = {
-  btn1: { number:1, text: 1, onClick:()=>{buttonNumber(1);}},
-  btn2: { number:2, text: 2, onClick:buttonNumber(2)},
-  btn3: { number:3, text: 3, onClick:buttonNumber(3)},
-  btn4: { number:4, text: 4, onClick:buttonNumber(4)},
-  btn5: { number:5, text: 5, onClick:buttonNumber(5)},
-  btn6: { number:6, text: 6, onClick:buttonNumber(6)},
-  btn7: { number:7, text: 7, onClick:buttonNumber(7)},
-  btn8: { number:8, text: 8, onClick:buttonNumber(8)},
-  btn9: { number:9, text: 9, onClick:buttonNumber(9)},
-  btn0: { number:0, text: 0, onClick:buttonNumber(0)},
-  btnDecimal: { number:".", text: ".", onClick:buttonNumber(".")},
-};
+  btn1: {btnType:"number", text: 1, keyCode : "Digit1", onClick:()=>{buttonNumber(1);}},
+  btn2: {btnType:"number", text: 2, keyCode : "Digit2", onClick:buttonNumber(2)},
+  btn3: {btnType:"number", text: 3, keyCode : "Digit3", onClick:buttonNumber(3)},
+  btn4: {btnType:"number", text: 4, keyCode : "Digit4", onClick:buttonNumber(4)},
+  btn5: {btnType:"number", text: 5, keyCode : "Digit5", onClick:buttonNumber(5)},
+  btn6: {btnType:"number", text: 6, keyCode : "Digit6", onClick:buttonNumber(6)},
+  btn7: {btnType:"number", text: 7, keyCode : "Digit7", onClick:buttonNumber(7)},
+  btn8: {btnType:"number", text: 8, keyCode : "Digit8", onClick:buttonNumber(8)},
+  btn9: {btnType:"number", text: 9, keyCode : "Digit9", onClick:buttonNumber(9)},
+  btn0: {btnType:"number", text: 0, keyCode : "Digit0", onClick:buttonNumber(0)},
+  btnDecimal: {btnType:"decimal", number:".", text: ".", keyCode : "Digit0", onClick:buttonNumber(".")},
+  btnPlus:    {btnType: "operator", operation: "+", text: "+", keyCode : "Digit0", onClick: buttonOperation("add")},
+  btnMinus:   {btnType: "operator", operation: "-", text: "-", keyCode : "Digit0", onClick: buttonOperation("minus")},
+  btnMultiply:{btnType: "operator", operation: "*", text: "*", keyCode : "Digit0", onClick: buttonOperation("times")},
+  btnDivide:  {btnType: "operator", operation: "/", text: "/", keyCode : "Digit0", onClick: buttonOperation("divide")},
+  btnEqual:   {btnType: "equal", operation: "=", text: "=", keyCode : "Digit0", onClick: buttonOperation("divide")},
+  btnAC:      {btnType: "clear", text: "AC", keyCode : "Digit0", onClick: buttonClear()},
+  btnNegPos:  {btnType: "negPos", text: "+/-", keyCode : "Digit0", onClick: buttonClear()},
+  btnPercent: {btnType: "percent", text: "%", keyCode : "Digit0", onClick: buttonClear()},
+}; 
 
 
-// fix equal function?
-const calcOperations = {
-    btnPlus: {operation: "+", text: "+", onClick: buttonOperation("add")},
-    btnMinus: {operation: "-", text: "-", onClick: buttonOperation("minus")},
-    btnMultiply: {operation: "*", text: "*", onClick: buttonOperation("times")},
-    btnDivide: {operation: "/", text: "/", onClick: buttonOperation("divide")},
-    btnEqual: {operation: "=", text: "=", onClick: buttonOperation("divide")},
-    btnAC: {text: "Clear", onClick: buttonClear()},
+const rowArray = [];
+const buttonArray = []
+
+function buildCalculator (){
+    // getButtonsWorking()
+    screenDiv = document.createElement("div");
+    screenDiv.classList.add("screen");
+    workspace.appendChild(screenDiv);
+    for (let i = 0; i <=4;i++){
+        rowArray[i] = document.createElement("div");
+        rowArray[i].style.display = "flex";
+        rowArray[i].classList.add("row");
+
+        for (let x = 0; x <=3; x++){
+            buttonArray[x] = document.createElement("button");
+            buttonArray[x].classList.add("button");
+            rowArray[i].appendChild(buttonArray[x])
+        
+        }
+        workspace.appendChild(rowArray[i])
+    }
 };
+buildCalculator()
+
+
+// function getButtonsWorking(){
+//     const buttonList = calcButtons.map((btn)=>{
+//         console.log(btn.text);
+//         btnAC.addEventListener('click', ()=>{
+//             buttonClear();});
+
+//         workspace.appendChild(screenDiv);
+//     }
+//     )
+// }
 
 
 
@@ -131,7 +159,7 @@ btnDivide.addEventListener('click', ()=> {
 
 
 btnEqual.addEventListener('click', ()=> {
-    buttonOperation("divide");}); 
+    buttonEquals();}); 
 
 // operator function turns on or off var 1 or var2.  
 // var1status = false
@@ -142,15 +170,21 @@ btnEqual.addEventListener('click', ()=> {
 // btnOne.addEventListener(c, buttonPress(1) )
 // btnTwo.addEventListener(onclick, buttonPress(2) )
 
+
+
+
 function buttonClear(){
-    setNumberSelect(1)
-    var1 = ""
-    screen.textContent = var1
+    setNumberSelect(0);
+    equation ="";
+    var1 = "";
+    var2 = "";
+    screen.textContent = equation;
 }
 
 function buttonOperation(operation) {
-    setNumberSelect(2)
+    setNumberSelect(1)
     let symbol;
+    operator = operation
     if (operation == "add"){
         symbol = "+";
     }else if(operation == "minus"){
@@ -161,77 +195,87 @@ function buttonOperation(operation) {
         symbol = "/";
     }else {console.log("Error : buttonOperation didn't operate.")
     }
-    var1 = var1 + symbol;
-    screen.textContent = var1
-    var1Status = false;
+    equation = equation + symbol;
+
+    screen.textContent = equation;
 }
 
-
+function buttonEquals (){
+    setNumberSelect(0);
+    if (operator == "add"){
+        answer = addition();
+    }else if(operator == "minus"){
+        answer = subtraction();
+    }else if(operator == "times"){
+        answer = multiplication();
+    }else if(operator == "divide"){
+        answer = division();
+    }else {console.log("Error : buttonnEquals didn't operate.")
+    }
+    screen.textContent = `${equation} = ${answer}`;
+    var1 = answer;
+    var2 = "";
+}
 
 function buttonNumber(number){
-
-   let string = number.toString()
-    var1 = var1 + string;
-    console.log(var1)
-    screen.textContent = var1
+    let string = number.toString()
+    switch(numberSelect ){
+        case 0:
+            equation = equation + string
+            var1 = var1 + string; 
+            screen.textContent = equation;
+            break
+        case 1:
+            equation = equation + string
+            var2 = var2 + string; 
+            screen.textContent = equation;
+            break
+    }
 }
 
-
-function addition(num1,num2){
-    result = num1+num2
-    console.log(result)
-
-    return result
-}
-
-function subtraction(num1,num2){
-    result = num1-num2
-    console.log(result)
-    return result
-}
-
-function multiplication(num1,num2){
-    result = num1*num2
-    console.log(result)
-    return result
-}
-
-function division(num1,num2){
-    result = num1/num2
-    console.log(result)
-    return result
-}
-
-
-
-function operateif(operation){
-    if (operation == "+"){
-        addition(num1,num2);
-    }else if(operation == "-"){
-        subtraction(num1,num2);
-    }else if(operation == "*"){
-        multiplication(num1,num2);
-    }else if(operation == "/"){
-        division(num1,num2);
-    }else {console.log("Error : operateif didn't operate.")
-
+function buttonNegPos(){
+    switch(numberSelect ){
+        case 0:
+            var1 = -var1
+            equation = equation + string
+            var1 = var1 + string; 
+            screen.textContent = equation;
+            break
+        case 1:
+            equation = equation + string
+            var2 = var2 + string; 
+            screen.textContent = equation;
+            break
     }
 }
 
 
-function operate(operation){
-    switch(operation){
-        case "+":
-            addition(num1,num2);
-            break
-        case "-":
-            subtraction(num1,num2);
-            break
-        case "*":
-            multiplication(num1,num2);
-            break
-        case "/":
-            division(num1,num2);
-            break
-    }
+
+
+function addition(){
+    const [x,y] =[parseInt(var1), parseInt(var2)] 
+    result = x+y
+    console.log(result)
+    return result
+}
+
+function subtraction(){
+    const [x,y] =[parseInt(var1), parseInt(var2)] 
+    result = x-y
+    console.log(result)
+    return result
+}
+
+function multiplication(){
+   const [x,y] =[parseInt(var1), parseInt(var2)] 
+    result = x*y
+    console.log(result)
+    return result
+}
+
+function division(){
+   const [x,y] =[parseInt(var1), parseInt(var2)] 
+    result = x/y
+    console.log(result)
+    return result
 }
