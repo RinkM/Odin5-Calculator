@@ -15,7 +15,7 @@ const setNumberSelect =  (number)=>{numberSelect = number};
 
 
 
-let allButtons = document.querySelectorAll(".button");
+let oldButtons = document.querySelectorAll(".button");
 
 
 
@@ -30,8 +30,11 @@ let allButtons = document.querySelectorAll(".button");
 // })
 
 const workspace = document.querySelector(".workspace");
-
+const workspace2 = document.querySelector(".workspace2");
 const btnOne = document.querySelector(".btnOne");
+btnOne.addEventListener('click', ()=>{
+    buttonNumber(1);});
+    // .textContent= `btn.text`
 const btnTwo = document.querySelector(".btnTwo");
 const btnThree = document.querySelector(".btnThree");
 const btnFour = document.querySelector(".btnFour");
@@ -62,37 +65,93 @@ const screen  = document.querySelector(".screen");
 // What's up with the function list?  it runs automatically...
 // https://www.w3.org/TR/uievents-code/#keyboard-key-codes
 
-const calcButtons = {
-  btn1: {btnType:"number", text: 1, keyCode : "Digit1", onClick:()=>{buttonNumber(1);}},
-  btn2: {btnType:"number", text: 2, keyCode : "Digit2", onClick:buttonNumber(2)},
-  btn3: {btnType:"number", text: 3, keyCode : "Digit3", onClick:buttonNumber(3)},
-  btn4: {btnType:"number", text: 4, keyCode : "Digit4", onClick:buttonNumber(4)},
-  btn5: {btnType:"number", text: 5, keyCode : "Digit5", onClick:buttonNumber(5)},
-  btn6: {btnType:"number", text: 6, keyCode : "Digit6", onClick:buttonNumber(6)},
-  btn7: {btnType:"number", text: 7, keyCode : "Digit7", onClick:buttonNumber(7)},
-  btn8: {btnType:"number", text: 8, keyCode : "Digit8", onClick:buttonNumber(8)},
-  btn9: {btnType:"number", text: 9, keyCode : "Digit9", onClick:buttonNumber(9)},
-  btn0: {btnType:"number", text: 0, keyCode : "Digit0", onClick:buttonNumber(0)},
-  btnDecimal: {btnType:"decimal", number:".", text: ".", keyCode : "Digit0", onClick:buttonNumber(".")},
-  btnPlus:    {btnType: "operator", operation: "+", text: "+", keyCode : "Digit0", onClick: buttonOperation("add")},
-  btnMinus:   {btnType: "operator", operation: "-", text: "-", keyCode : "Digit0", onClick: buttonOperation("minus")},
-  btnMultiply:{btnType: "operator", operation: "*", text: "*", keyCode : "Digit0", onClick: buttonOperation("times")},
-  btnDivide:  {btnType: "operator", operation: "/", text: "/", keyCode : "Digit0", onClick: buttonOperation("divide")},
-  btnEqual:   {btnType: "equal", operation: "=", text: "=", keyCode : "Digit0", onClick: buttonOperation("divide")},
-  btnAC:      {btnType: "clear", text: "AC", keyCode : "Digit0", onClick: buttonClear()},
-  btnNegPos:  {btnType: "negPos", text: "+/-", keyCode : "Digit0", onClick: buttonClear()},
-  btnPercent: {btnType: "percent", text: "%", keyCode : "Digit0", onClick: buttonClear()},
-}; 
 
+const calcButtons = {
+    btn1: {className: "btn1", btnType:"number", text: 1, keyCode : "Digit1", onClick:()=>{buttonNumber(1);}},
+    btn2: {className: "btn2", btnType:"number", text: 2, keyCode : "Digit2", onClick:()=>buttonNumber(2)},
+    btn3: {className: "btn3", btnType:"number", text: 3, keyCode : "Digit3", onClick:()=>buttonNumber(3)},
+    btn4: {className: "btn4", btnType:"number", text: 4, keyCode : "Digit4", onClick:()=>buttonNumber(4)},
+    btn5: {className: "btn5", btnType:"number", text: 5, keyCode : "Digit5", onClick:()=>buttonNumber(5)},
+    btn6: {className: "btn6", btnType:"number", text: 6, keyCode : "Digit6", onClick:()=>buttonNumber(6)},
+    btn7: {className: "btn7", btnType:"number", text: 7, keyCode : "Digit7", onClick:()=>buttonNumber(7)},
+    btn8: {className: "btn8", btnType:"number", text: 8, keyCode : "Digit8", onClick:()=>buttonNumber(8)},
+    btn9: {className: "btn9", btnType:"number", text: 9, keyCode : "Digit9", onClick:()=>buttonNumber(9)},
+    btn0: {className: "btn0", btnType:"number", text: 0, keyCode : "Digit0", onClick:()=>buttonNumber(0)},
+    btnDecimal: {className: "btnDecimal", btnType:"decimal", number:".", text: ".", keyCode : "Digit0", onClick:()=>buttonNumber(".")},
+    btnPlus:    {className: "btnPlus", btnType: "operator", operation: "+", text: "+", keyCode : "Digit0", onClick:()=> buttonOperation("add")},
+    btnMinus:   {className: "btnMinus", btnType: "operator", operation: "-", text: "-", keyCode : "Digit0", onClick:()=> buttonOperation("minus")},
+    btnMultiply:{className: "btnMultiply", btnType: "operator", operation: "*", text: "*", keyCode : "Digit0", onClick:()=> buttonOperation("times")},
+    btnDivide:  {className: "btnDivide", btnType: "operator", operation: "/", text: "/", keyCode : "Digit0", onClick:()=> buttonOperation("divide")},
+    btnEqual:   {className: "btnEqual", btnType: "equal", operation: "=", text: "=", keyCode : "Digit0", onClick:()=> buttonOperation("divide")},
+    btnAC:      {className: "btnAC", btnType: "clear", text: "AC", keyCode : "Digit0", onClick:()=> buttonClear()},
+    btnNegPos:  {className: "btnNegPos", btnType: "negPos", text: "+/-", keyCode : "Digit0", onClick:()=> buttonClear()},
+    btnPercent: {className: "btnPercent", btnType: "percent", text: "%", keyCode : "Digit0", onClick:()=> buttonClear()},
+  }; 
+// This controls the order of the buttons as the appear on the screen.
+const buttonOrder = 
+    [[calcButtons.btnAC, calcButtons.btnNegPos, calcButtons.btnPercent, calcButtons.btnDivide],
+   [calcButtons.btn7, calcButtons.btn8, calcButtons.btn9, calcButtons.btnMultiply],
+   [calcButtons.btn4, calcButtons.btn5, calcButtons.btn6, calcButtons.btnMinus],
+   [calcButtons.btn1, calcButtons.btn2, calcButtons.btn3, calcButtons.btnPlus],
+   [calcButtons.btn0, calcButtons.btnDecimal, calcButtons.btnEqual]]
 
 const rowArray = [];
 const buttonArray = []
+   
+function Calc3 (){
+    // getButtonsWorking()
+    screenDiv = document.createElement("div");
+    screenDiv.classList.add("screen");
+    workspace2.appendChild(screenDiv);
+
+    for (const row of buttonOrder){
+        const rowIndex = buttonOrder.indexOf(row)
+        rowArray[rowIndex] = document.createElement("div");
+        rowArray[rowIndex].style.display = "flex";
+        rowArray[rowIndex].classList.add("row");
+        rowArray[rowIndex].classList.add(`row${rowIndex}`);
+        for (const btn of row){
+            console.log("btn: " + btn)
+            const btnIndex = row.indexOf(btn)
+            console.log("btnIndex: "+ btnIndex)
+            buttonArray[btnIndex] = document.createElement("button");
+            buttonArray[btnIndex].classList.add("test", "Button",`${btn.className}`);
+            console.log("array[index]: "+ document.querySelector(`.${btn.className}`))
+            console.log("btn.className: " +"."+btn.className)
+            
+        
+
+
+            const button = document.querySelector(`.${btn.className}`)
+            console.log(button)
+            button.textContent = `${btn.text}`
+            button.addEventListener('click', btn.onClick);
+// todo button.keyCode
+            
+            
+         }
+        rowArray[rowIndex].appendChild(buttonArray[btnIndex])
+        workspace2.appendChild(rowArray[rowIndex])
+    }
+}
+
+
+
+Calc3()
+const btn1 = document.querySelector(".btnOne");
+
+    // .textContent= `btn.text`
+
+
+
+
 
 function buildCalculator (){
     // getButtonsWorking()
     screenDiv = document.createElement("div");
     screenDiv.classList.add("screen");
     workspace.appendChild(screenDiv);
+
     for (let i = 0; i <=4;i++){
         rowArray[i] = document.createElement("div");
         rowArray[i].style.display = "flex";
@@ -100,14 +159,17 @@ function buildCalculator (){
 
         for (let x = 0; x <=3; x++){
             buttonArray[x] = document.createElement("button");
-            buttonArray[x].classList.add("button");
+            buttonArray[x].classList.add("Button");
+            buttonArray[x].classList.add("newButton");
             rowArray[i].appendChild(buttonArray[x])
         
         }
         workspace.appendChild(rowArray[i])
     }
+    
 };
 buildCalculator()
+let newButtons = document.querySelectorAll(".newButton");
 
 
 // function getButtonsWorking(){
