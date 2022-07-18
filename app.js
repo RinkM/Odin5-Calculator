@@ -1,8 +1,8 @@
 // import {calcButtons, buttonOrder} from "./buttons.js";
 
 // TODO  and Problems
-// able to add ++++++
-// what happens after a equals.
+
+    
 // percentage signs
 // fixing negative when needed.
 //decimal writes, doesn't function.
@@ -32,27 +32,27 @@ const workspace2 = document.querySelector(".workspace2");
 
 const calculatorButtons = [
     [{className: "btnAC", btnType: "clear", text: "AC",  onClick:()=> buttonClear()},
-    {className: "btnNegPos", btnType: "negPos", text: "+/-", onClick:()=> buttonNegPos()},
-    {className: "btnPercent", btnType: "percent", text: "%",  onClick:()=> buttonClear()},
+    {className: "btnNegPos", btnType: "btnStyle3", text: "+/-", onClick:()=> buttonNegPos()},
+    {className: "btnPercent", btnType: "btnStyle3", text: "%",  onClick:()=> buttonClear()},
     {className: "btnDivide", btnType: "operator", text: "/", onClick:()=> buttonOperation("/")}],
 
-    [{className: "btn1", btnType:"number", text: 1, onClick:()=>buttonNumber(1)},
-    {className: "btn2", btnType:"number", text: 2, onClick:()=>buttonNumber(2)},
-    {className: "btn3", btnType:"number", text: 3, onClick:()=>buttonNumber(3)},
+    [{className: "btn7", btnType:"number", text: 7, onClick:()=>buttonNumber(7)},
+    {className: "btn8", btnType:"number", text: 8, onClick:()=>buttonNumber(8)},
+    {className: "btn9", btnType:"number", text: 9, onClick:()=>buttonNumber(9)},   
     {className: "btnMultiply", btnType: "operator", text: "*", onClick:()=> buttonOperation("*")}],
 
     [{className: "btn4", btnType:"number", text: 4, onClick:()=>buttonNumber(4)},
-    {className: "btn5", btnType:"number", text: 5, onClick:()=>buttonNumber(5)},
+    {className: "btn5", btnType:"number", text: 5, onClick:()=>buttonNumber(5)} ,
     {className: "btn6", btnType:"number", text: 6, onClick:()=>buttonNumber(6)},
     {className: "btnMinus", btnType: "operator", text: "-", onClick:()=> buttonOperation("-")}],
     
-    [{className: "btn7", btnType:"number", text: 7, onClick:()=>buttonNumber(7)},
-    {className: "btn8", btnType:"number", text: 8, onClick:()=>buttonNumber(8)},
-    {className: "btn9", btnType:"number", text: 9, onClick:()=>buttonNumber(9)},
+    [{className: "btn1", btnType:"number", text: 1, onClick:()=>buttonNumber(1)},
+    {className: "btn2", btnType:"number", text: 2, onClick:()=>buttonNumber(2)},
+    {className: "btn3", btnType:"number", text: 3, onClick:()=>buttonNumber(3)},
     {className: "btnPlus", btnType: "operator", text: "+", onClick:()=> buttonOperation("+")}],
 
     [{className: "btn0", btnType:"number", text: 0, onClick:()=>buttonNumber(0)},
-    {className: "btnDecimal", btnType:"decimal", text: ".", onClick:()=>buttonNumber(".")},
+    {className: "btnDecimal", btnType:"btnStyle3", text: ".", onClick:()=>buttonNumber(".")},
     {className: "btnEqual", btnType: "equal", text: "=", onClick:()=> buttonEquals()}]
 ]; 
 
@@ -86,10 +86,11 @@ function buildCalculator (){
 
 const handleKeyboardInput = (e) => {
     console.log(e)
-    if ((e.key >= 0 && e.key <= 9) || e.key == ".") {buttonNumber(e.key);}
-    if (e.key == "=" || e.key == "Enter") {buttonEquals();}
-    if (e.key == "Escape") {buttonClear();}
-    if (e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/") {{buttonOperation(e.key);}}
+    if ((e.key >= 0 && e.key <= 9) || e.key == ".") {buttonNumber(e.key);
+    } else if (e.key == "=" || e.key == "Enter") {buttonEquals();
+    } else if (e.key == "Escape") {buttonClear();
+    } else if (e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/") {{buttonOperation(e.key);}
+    }
     
     // if (e.key == "Backspace") deleteOne();
   };
@@ -102,35 +103,33 @@ const screen  = document.getElementsByClassName("screen")[0]
 
 function buttonClear(){
     setNumberSelect(0);
-    // equation ="";
     var1 = "";
     var2 = "";
     operator = "";
-    screen.textContent = equation;
+    answer = "";
+    writeEquation()
 }
 
 function buttonOperation(operation) {
+    if (answer){var1=answer}
     if (var1){
         let symbol;
-        operator = operation
         if (operation == "+"){
-            symbol = "+";
+            operator = "+";
         }else if(operation == "-"){
-            symbol = "-";
+            operator = "-";
         }else if(operation == "*"){
-            symbol = "*";
+            operator = "*"; 
         }else if(operation == "/"){
-            symbol = "/";
+            operator = "/";
         }else {console.log("Error : buttonOperation didn't operate.")
         }
-        // equation = equation + symbol; 
-        setNumberSelect(1)
-        screen.textContent = equation;
+        setNumberSelect(1);
+        writeEquation()
     }
 }
 
 function buttonEquals (){
-    setNumberSelect(0);
     if (var1 && var2 && operator){
         if (operator == "+"){
             answer = addition();
@@ -142,11 +141,14 @@ function buttonEquals (){
             answer = division();
         }else {console.log("Error : buttonEquals didn't operate.")
         }
-        screen.textContent = `${equation} = ${answer}`;
-        var1 = answer;
+        diagnosis("buttonEquals")
+        setNumberSelect(0);
+        writeEquation(answer)
+        var1 = "";
         var2 = "";
+
+
     }
-    
 }
 
 function buttonNumber(number){
@@ -154,16 +156,24 @@ function buttonNumber(number){
 
     switch(numberSelect){
         case 0:
-            equation = equation + string
+            answer = ""
             var1 = var1 + string; 
-            screen.textContent = equation;
+            writeEquation();
             break
         case 1:
-            equation = equation + string
             var2 = var2 + string; 
-            screen.textContent = equation;
+            writeEquation();
             break
     }
+    diagnosis("buttonNumber")
+}
+
+function writeEquation(answer){
+    if(answer){
+    equation = `${var1} ${operator} ${var2} = ${answer}`
+    screen.textContent = equation;
+    } else {equation = `${var1} ${operator} ${var2}`
+    screen.textContent = equation;}
 }
 
 function buttonNegPos(){
@@ -171,24 +181,20 @@ function buttonNegPos(){
         case 0:
             if (var1 < 0){
                 var1 = -var1
-                equation = `${var1} ${operator} ${var2}`
-                screen.textContent = equation;
+                writeEquation()
             } else if (var1 > 0){
                 var1 = -var1
-                equation = `${var1} ${operator} ${var2}`
-                screen.textContent = equation;
+                writeEquation()
             } else {console.log(0)}
 
             break
         case 1:
             if (var2 < 0){
                 var2 = -var2
-                equation = `${var1} ${operator} ${var2}`
-                screen.textContent = equation;
+                writeEquation()
             } else if (var2 > 0){
                 var2 = -var2
-                equation = `${var1} ${operator} ${var2}`
-                screen.textContent = equation;
+                writeEquation()
             } else {console.log(0)}
             break
     }
@@ -216,4 +222,15 @@ function division(){
    const [x,y] =[parseInt(var1), parseInt(var2)] 
     result = x/y
     return result
+}
+
+
+
+function diagnosis(func) {
+    console.log(func);
+    console.log("var1: " +var1 )
+    console.log("var2: " +var2 )
+    console.log("operator: " + operator)
+    console.log("equation: " +equation )
+    console.log("answer: " +answer )
 }

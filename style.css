@@ -1,23 +1,29 @@
 body{
-    border:1px solid green;
+    /* border:1px solid green; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-family:Arial, Helvetica, sans-serif;
-    font-size:30px;
+    font-size:40px;
 
 }
 
 div{
-    border:1px solid orangered;
-    margin: -1px
+    
+    /* margin: -1px */
 
 }
 
-.appSpace,.workspace2{
+.workspace2{
+    background: hotpink    ;
+    /* border:1px solid grey; */
     width: 400px;
     display: flex;
     flex-direction: column;
+    border-radius: 15px;
+    box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
 
 }
 
@@ -35,16 +41,26 @@ div{
     font-size:30px;
     
     flex-grow:1;
-    border-radius: 15px;
+    border-radius: 35px;
     margin:3px;
     text-align:center;
 }
 .operator{
-    background-color: gold;
+    background-color: chartreuse;
+}
+
+.clear{
+    background-color: lightskyblue;
+}
+.btnStyle3{
+    background-color: lightseagreen;
+}
+.equal{
+    background-color: rgb(255, 44, 44);
 }
 
 .number{
-    background-color: chartreuse;
+    background-color: lightgrey ;
 } 
 
 .btnText {
@@ -62,13 +78,12 @@ div{
 }
 
 .screen{
+    background:whitesmoke;   
     height: 2em;
-    width: 100%;
-    flex-grow: 1;
     text-align: end;
-    align-self: flex-end;
-    
-
-    
+    border-radius: 15px 15px 0px 0px;
+    /* border:1px solid grey; */
+    margin-bottom: 10px;
+    padding: 20px 10px 5px;
 }
 
