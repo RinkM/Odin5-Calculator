@@ -8,23 +8,26 @@ body{
 
 }
 
-div{
-    
-    /* margin: -1px */
-
+.calculator{
+    align-self: center;
+    border-radius: 15px;
+    padding: 20px;
+    background: #007944    ;
+    box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
 }
 
 .workspace2{
-    align-self: center;
-    background: hotpink    ;
+    
+    background: #007944    ;
     /* border:1px solid grey; */
     width: 400px;
     display: flex;
     flex-direction: column;
     border-radius: 15px;
-    box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
+
+
 
 }
 
@@ -47,21 +50,21 @@ div{
     text-align:center;
 }
 .operator{
-    background-color: chartreuse;
+    background-color: #FFBBB4;
 }
 
 .clear{
-    background-color: lightskyblue;
+    background-color:  #71A95A;
 }
 .btnStyle3{
-    background-color: lightseagreen;
+    background-color:  #71A95A;
 }
 .equal{
-    background-color: rgb(255, 44, 44);
+    background-color: #71A95A;
 }
 
 .number{
-    background-color: lightgrey ;
+    background-color: #F35588 ;
 } 
 
 .btnText {
