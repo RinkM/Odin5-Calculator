@@ -15,6 +15,7 @@ div{
 }
 
 .workspace2{
+    align-self: center;
     background: hotpink    ;
     /* border:1px solid grey; */
     width: 400px;
@@ -87,3 +88,16 @@ div{
     padding: 20px 10px 5px;
 }
 
+
+
+
+footer {
+    align-self: center;
+    margin-top: 25px;
+    background-color: #ffffff;
+    /* color: white; */
+    display: flex;
+    align-items: center;
+    height: 60px;
+    margin: 50px;
+}
