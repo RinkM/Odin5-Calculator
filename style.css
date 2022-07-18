@@ -1,6 +1,7 @@
 body{
     border:1px solid green;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     font-family:Arial, Helvetica, sans-serif;
     font-size:30px;
@@ -13,7 +14,7 @@ div{
 
 }
 
-.appSpace{
+.appSpace,.workspace2{
     width: 400px;
     display: flex;
     flex-direction: column;
@@ -31,12 +32,20 @@ div{
     width: 80px;
     height: 80px;
     line-height: 80px;
-    background-color: chartreuse;
+    font-size:30px;
+    
     flex-grow:1;
     border-radius: 15px;
     margin:3px;
     text-align:center;
 }
+.operator{
+    background-color: gold;
+}
+
+.number{
+    background-color: chartreuse;
+} 
 
 .btnText {
     display: inline-block;
@@ -54,6 +63,7 @@ div{
 
 .screen{
     height: 2em;
+    width: 100%;
     flex-grow: 1;
     text-align: end;
     align-self: flex-end;
