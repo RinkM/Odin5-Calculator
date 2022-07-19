@@ -2,13 +2,13 @@ body{
     /* border:1px solid green; */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-content: center;
     font-family:Arial, Helvetica, sans-serif;
     font-size:40px;
-
 }
 
 .calculator{
+    margin-top: 10px;
     align-self: center;
     border-radius: 15px;
     padding: 20px;
@@ -83,12 +83,12 @@ body{
 
 .screen{
     background:whitesmoke;   
-    height: 2em;
+    height: 3em;
     text-align: end;
     border-radius: 15px 15px 0px 0px;
     /* border:1px solid grey; */
     margin-bottom: 10px;
-    padding: 20px 10px 5px;
+    padding: 20px 10px 20px;
 }
 
 
@@ -96,11 +96,14 @@ body{
 
 footer {
     align-self: center;
-    margin-top: 25px;
-    background-color: #ffffff;
-    /* color: white; */
     display: flex;
     align-items: center;
-    height: 60px;
     margin: 50px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+.footer--img{
+    max-height: 2em ;
+    border-radius: 50px;
+    margin-right: .5em;
 }
