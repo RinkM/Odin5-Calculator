@@ -1,13 +1,9 @@
 // import {calcButtons, buttonOrder} from "./buttons.js";
 
 // TODO  and Problems
-
-    
-// percentage signs
-// fixing negative when needed.
-//decimal writes, doesn't function.
-// divide by zero error. 
-// style
+// negative + percentage buttons being hit after equal.
+// the precision of .10000   how to clean up the 0's
+// 0 divide 0= nan   is this a problem?
 
 
 
@@ -33,7 +29,7 @@ const workspace2 = document.querySelector(".workspace2");
 const calculatorButtons = [
     [{className: "btnAC", btnType: "clear", text: "AC",  onClick:()=> buttonClear()},
     {className: "btnNegPos", btnType: "btnStyle3", text: "+/-", onClick:()=> buttonNegPos()},
-    {className: "btnPercent", btnType: "btnStyle3", text: "%",  onClick:()=> buttonClear()},
+    {className: "btnPercent", btnType: "btnStyle3", text: "%",  onClick:()=> buttonPercent()},
     {className: "btnDivide", btnType: "operator", text: "/", onClick:()=> buttonOperation("/")}],
 
     [{className: "btn7", btnType:"number", text: 7, onClick:()=>buttonNumber(7)},
@@ -161,10 +157,7 @@ function buttonEquals (){
     }
 }
 
-function numberLimit(){}
-
 function buttonNumber(number){
-    console.log(var1.length)
     let string = number.toString();
     switch(numberSelect){
         case 0:
@@ -215,6 +208,19 @@ function buttonNegPos(){
             } else {console.log(0)}
             break
     }
+}
+
+function buttonPercent(){
+    switch(numberSelect){
+        case 0:
+            var1 = var1/100;
+            break
+        case 1:
+            var2 = var2/100;
+            break
+        
+    }
+    writeEquation()
 }
 
 function addition(){
