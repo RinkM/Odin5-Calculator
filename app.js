@@ -100,6 +100,14 @@ window.addEventListener("keydown", handleKeyboardInput)
 buildCalculator()
 const screen  = document.getElementsByClassName("screen")[0]
 
+function preciseAnswer(x) {
+    if (x % 1 ===0){
+        return x
+    }else return x.toPrecision(6);
+  }
+
+ 
+  
 
 function buttonClear(){
     setNumberSelect(0);
@@ -111,7 +119,10 @@ function buttonClear(){
 }
 
 function buttonOperation(operation) {
+    if (var1 && var2 && operator){
+        buttonEquals()}
     if (answer){var1=answer}
+    if (answer=="0") {var1="0"}
     if (var1){
         let symbol;
         if (operation == "+"){
@@ -143,33 +154,39 @@ function buttonEquals (){
         }
         diagnosis("buttonEquals")
         setNumberSelect(0);
+        answer = preciseAnswer(answer)
         writeEquation(answer)
         var1 = "";
-        var2 = "";
-
-
+        var2 = ""
     }
 }
+
+function numberLimit(){}
 
 function buttonNumber(number){
-    let string = number.toString()
-
+    console.log(var1.length)
+    let string = number.toString();
     switch(numberSelect){
         case 0:
-            answer = ""
-            var1 = var1 + string; 
-            writeEquation();
-            break
+            if (var1.length <= 9){
+                operator=""
+                answer = ""
+                var1 = var1 + string; 
+                writeEquation();
+                break
+            } else {break}
         case 1:
-            var2 = var2 + string; 
-            writeEquation();
-            break
+            if (var2.length <= 9){    
+                var2 = var2 + string; 
+                writeEquation();
+                break
+            } else {break}
+        }
     }
-    diagnosis("buttonNumber")
-}
+// diagnosis("buttonNumber")
 
 function writeEquation(answer){
-    if(answer){
+    if(answer=="0"||answer){
     equation = `${var1} ${operator} ${var2} = ${answer}`
     screen.textContent = equation;
     } else {equation = `${var1} ${operator} ${var2}`
@@ -201,25 +218,25 @@ function buttonNegPos(){
 }
 
 function addition(){
-    const [x,y] =[parseInt(var1), parseInt(var2)] 
+    const [x,y] =[parseFloat(var1), parseFloat(var2)] 
     result = x+y
     return result
 }
 
 function subtraction(){
-    const [x,y] =[parseInt(var1), parseInt(var2)] 
+    const [x,y] =[parseFloat(var1), parseFloat(var2)] 
     result = x-y
     return result
 }
 
 function multiplication(){
-   const [x,y] =[parseInt(var1), parseInt(var2)] 
+   const [x,y] =[parseFloat(var1), parseFloat(var2)] 
     result = x*y
     return result
 }
 
 function division(){
-   const [x,y] =[parseInt(var1), parseInt(var2)] 
+   const [x,y] =[parseFloat(var1), parseFloat(var2)] 
     result = x/y
     return result
 }
@@ -227,7 +244,7 @@ function division(){
 
 
 function diagnosis(func) {
-    console.log(func);
+    console.log(func);  
     console.log("var1: " +var1 )
     console.log("var2: " +var2 )
     console.log("operator: " + operator)
