@@ -1,3 +1,6 @@
+
+
+
 body{
     /* border:1px solid green; */
     display: flex;
@@ -22,7 +25,7 @@ body{
     
     background: #007944    ;
     /* border:1px solid grey; */
-    width: 400px;
+    width: 320px;
     display: flex;
     flex-direction: column;
     border-radius: 15px;
@@ -39,10 +42,10 @@ body{
 }
 
 .button{
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    font-size:30px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    font-size:24px;
     
     flex-grow:1;
     border-radius: 35px;
