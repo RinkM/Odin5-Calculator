@@ -1,6 +1,4 @@
-
-issues : 
-able to print +++++++ in screen.
+##
 
 
 
@@ -12,11 +10,6 @@ Screen View :
 |                               |
 |               current number  |
 
-
-Normal Operation in order : 
-person presses a number.    record the number in Var1.
-screen shows the full equation string [ x-y ] this is for show
-behind the scenes is the actual math and equation.
 
 x operator y 
 
@@ -52,41 +45,3 @@ if number select == var1, flip to var2.
 if number select ==var2, do nothing.
 if clear resets the var?
 
-
-on operator press... add to display.  save selected operator.  'add' 'sub', etc.
-flip to var2
-
-equal
-
-button1 - edits var1
-buttonOperator - chooses the operator and opens var2.   how can there only be one
- +- etc. on screen?
- Button2 edits var2
-
-
-List of all the buttons CSS class names :
-
-
-btnAC
-btnNegative
-btnPercent
-btnDivide
-
-btnSeven
-btnEight
-btnNine
-btnMultiply
-
-btnFive
-btnSix
-btnFour
-btnMinus
-
-btnOne
-btnTwo
-btnThree
-btnPlus
-
-btnZero
-btnDecimal
-btnEqual

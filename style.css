@@ -1,22 +1,33 @@
 body{
-    border:1px solid green;
+    /* border:1px solid green; */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-content: center;
     font-family:Arial, Helvetica, sans-serif;
-    font-size:30px;
-
+    font-size:40px;
 }
 
-div{
-    border:1px solid orangered;
-    margin: -1px
-
+.calculator{
+    margin-top: 10px;
+    align-self: center;
+    border-radius: 15px;
+    padding: 20px;
+    background: #007944    ;
+    box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
 }
 
-.appSpace{
+.workspace2{
+    
+    background: #007944    ;
+    /* border:1px solid grey; */
     width: 400px;
     display: flex;
     flex-direction: column;
+    border-radius: 15px;
+
+
 
 }
 
@@ -31,12 +42,30 @@ div{
     width: 80px;
     height: 80px;
     line-height: 80px;
-    background-color: chartreuse;
+    font-size:30px;
+    
     flex-grow:1;
-    border-radius: 15px;
+    border-radius: 35px;
     margin:3px;
     text-align:center;
 }
+.operator{
+    background-color: #FFBBB4;
+}
+
+.clear{
+    background-color:  #71A95A;
+}
+.btnStyle3{
+    background-color:  #71A95A;
+}
+.equal{
+    background-color: #71A95A;
+}
+
+.number{
+    background-color: #F35588 ;
+} 
 
 .btnText {
     display: inline-block;
@@ -53,12 +82,28 @@ div{
 }
 
 .screen{
-    height: 2em;
-    flex-grow: 1;
+    background:whitesmoke;   
+    height: 3em;
     text-align: end;
-    align-self: flex-end;
-    
-
-    
+    border-radius: 15px 15px 0px 0px;
+    /* border:1px solid grey; */
+    margin-bottom: 10px;
+    padding: 20px 10px 20px;
 }
 
+
+
+
+footer {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    margin: 50px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+.footer--img{
+    max-height: 2em ;
+    border-radius: 50px;
+    margin-right: .5em;
+}
