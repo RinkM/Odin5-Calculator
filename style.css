@@ -1,22 +1,36 @@
+
+
+
 body{
-    border:1px solid green;
-    display: flex;
-    justify-content: center;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:30px;
-
-}
-
-div{
-    border:1px solid orangered;
-    margin: -1px
-
-}
-
-.appSpace{
-    width: 400px;
+    /* border:1px solid green; */
     display: flex;
     flex-direction: column;
+    align-content: center;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:40px;
+}
+
+.calculator{
+    margin-top: 10px;
+    align-self: center;
+    border-radius: 15px;
+    padding: 20px;
+    background: #007944    ;
+    box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 11px 16px 23px 1px rgba(0,0,0,0.75);
+}
+
+.workspace2{
+    
+    background: #007944    ;
+    /* border:1px solid grey; */
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+
+
 
 }
 
@@ -28,15 +42,33 @@ div{
 }
 
 .button{
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    background-color: chartreuse;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    font-size:24px;
+    
     flex-grow:1;
-    border-radius: 15px;
+    border-radius: 35px;
     margin:3px;
     text-align:center;
 }
+.operator{
+    background-color: #FFBBB4;
+}
+
+.clear{
+    background-color:  #71A95A;
+}
+.btnStyle3{
+    background-color:  #71A95A;
+}
+.equal{
+    background-color: #71A95A;
+}
+
+.number{
+    background-color: #F35588 ;
+} 
 
 .btnText {
     display: inline-block;
@@ -53,12 +85,28 @@ div{
 }
 
 .screen{
-    height: 2em;
-    flex-grow: 1;
+    background:whitesmoke;   
+    height: 3em;
     text-align: end;
-    align-self: flex-end;
-    
-
-    
+    border-radius: 15px 15px 0px 0px;
+    /* border:1px solid grey; */
+    margin-bottom: 10px;
+    padding: 20px 10px 20px;
 }
 
+
+
+
+footer {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    margin: 50px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+.footer--img{
+    max-height: 2em ;
+    border-radius: 50px;
+    margin-right: .5em;
+}
