@@ -247,8 +247,6 @@ function division(){
     return result
 }
 
-
-
 function diagnosis(func) {
     console.log(func);  
     console.log("var1: " +var1 )
