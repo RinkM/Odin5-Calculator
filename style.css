@@ -42,6 +42,7 @@ body{
 }
 
 .button{
+    color: black;
     width: 60px;
     height: 60px;
     line-height: 60px;
@@ -54,6 +55,8 @@ body{
 }
 .operator{
     background-color: #FFBBB4;
+    font-size:30px;
+    padding-bottom: 10px;
 }
 
 .clear{

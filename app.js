@@ -30,12 +30,12 @@ const calculatorButtons = [
     [{className: "btnAC", btnType: "clear", text: "AC",  onClick:()=> buttonClear()},
     {className: "btnNegPos", btnType: "btnStyle3", text: "+/-", onClick:()=> buttonNegPos()},
     {className: "btnPercent", btnType: "btnStyle3", text: "%",  onClick:()=> buttonPercent()},
-    {className: "btnDivide", btnType: "operator", text: "/", onClick:()=> buttonOperation("/")}],
+    {className: "btnDivide", btnType: "operator", text: "\u00f7", onClick:()=> buttonOperation("/")}],
 
     [{className: "btn7", btnType:"number", text: 7, onClick:()=>buttonNumber(7)},
     {className: "btn8", btnType:"number", text: 8, onClick:()=>buttonNumber(8)},
     {className: "btn9", btnType:"number", text: 9, onClick:()=>buttonNumber(9)},   
-    {className: "btnMultiply", btnType: "operator", text: "*", onClick:()=> buttonOperation("*")}],
+    {className: "btnMultiply", btnType: "operator", text: "x", onClick:()=> buttonOperation("x")}],
 
     [{className: "btn4", btnType:"number", text: 4, onClick:()=>buttonNumber(4)},
     {className: "btn5", btnType:"number", text: 5, onClick:()=>buttonNumber(5)} ,
@@ -85,7 +85,8 @@ const handleKeyboardInput = (e) => {
     if ((e.key >= 0 && e.key <= 9) || e.key == ".") {buttonNumber(e.key);
     } else if (e.key == "=" || e.key == "Enter") {buttonEquals();
     } else if (e.key == "Escape") {buttonClear();
-    } else if (e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/") {{buttonOperation(e.key);}
+    } else if (e.key == "*"){buttonOperation("x");
+    } else if (e.key == "+" || e.key == "-" || e.key == "x" || e.key == "/") {{buttonOperation(e.key);}
     }
     
     // if (e.key == "Backspace") deleteOne();
@@ -120,13 +121,12 @@ function buttonOperation(operation) {
     if (answer){var1=answer}
     if (answer=="0") {var1="0"}
     if (var1){
-        let symbol;
         if (operation == "+"){
             operator = "+";
         }else if(operation == "-"){
             operator = "-";
-        }else if(operation == "*"){
-            operator = "*"; 
+        }else if(operation == "x"){
+            operator = "x"; 
         }else if(operation == "/"){
             operator = "/";
         }else {console.log("Error : buttonOperation didn't operate.")
@@ -142,7 +142,7 @@ function buttonEquals (){
             answer = addition();
         }else if(operator == "-"){
             answer = subtraction();
-        }else if(operator == "*"){
+        }else if(operator == "x"){
             answer = multiplication();
         }else if(operator == "/"){
             answer = division();
@@ -248,7 +248,7 @@ function division(){
 }
 
 function diagnosis(func) {
-    console.log(func);  
+    // console.log(func);  
     console.log("var1: " +var1 )
     console.log("var2: " +var2 )
     console.log("operator: " + operator)
